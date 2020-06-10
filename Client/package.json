@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "bootstrap": "^4.5.0",
     "bulma": "^0.8.2",
     "core-js": "^3.6.4",
     "register-service-worker": "^1.7.1",
