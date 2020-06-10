@@ -1,0 +1,14 @@
+html,
+body {
+	height: 100%;
+	overflow-x: hidden;
+	font-family: 'Nunito', sans-serif;
+}
+
+.app {
+	min-height: 100vh;
+}
+
+.fullscreen-height {
+	height: 100vh - $header-height;
+}

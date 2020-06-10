@@ -1,5 +1,3 @@
-$header-height: 10vh;
-
 header {
 	height: $header-height;
 }
@@ -43,8 +41,9 @@ header {
 	&-menu {
 		pointer-events: none;
 		top: $header-height - 1vh;
-		transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-		left: 10%;
+		transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 0.95);
+		border-radius: 5px;
+		left: 110%;
 		display: flex;
 		padding-top: 10vh;
 		width: 100%;

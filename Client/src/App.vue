@@ -1,6 +1,7 @@
 <template>
 	<div class="app" id="app">
 		<Header />
+		<router-view />
 	</div>
 </template>
 
@@ -21,9 +22,4 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
-.app {
-	overflow-x: hidden;
-	min-height: 100vh;
-	font-family: 'Nunito', sans-serif;
-}
 </style>
