@@ -52,7 +52,6 @@ header {
 		position: absolute;
 		height: 100vh - $header-height;
 		z-index: 1;
-		opacity: 0;
 		font-size: 1.5em;
 		text-align: center;
 		font-weight: 700;
@@ -65,7 +64,6 @@ header {
 		&.show {
 			pointer-events: all;
 			left: 0;
-			opacity: 1;
 		}
 	}
 }
