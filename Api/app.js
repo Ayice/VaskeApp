@@ -11,13 +11,14 @@ mongoose.set('useCreateIndex', true)
 const machineRoute = require('./routes/machine')
 const userRoute = require('./routes/user')
 const appartmentRoute = require('./routes/appartment')
-const cityRouute = require('./routes/city')
+const cityRoute = require('./routes/city')
 
 /**
  * Middlewares
  */
 app.use(cors())
 app.use(express.json())
+app.use('/api/uploads', express.static('uploads'))
 
 /**
  *
@@ -26,12 +27,12 @@ app.use(express.json())
  */
 
 app.use(
-	session({
-		secret: 'Session secret',
-		resave: false,
-		saveUninitialized: true,
-		cookie: { secure: true },
-	})
+  session({
+    secret: 'Session secret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  })
 )
 
 /**
@@ -40,18 +41,18 @@ app.use(
 app.use('/api/machine', authFuntion, machineRoute)
 app.use('/api/user', userRoute)
 app.use('/api/appartment', appartmentRoute)
-app.use('/api/city', cityRouute)
+app.use('/api/city', cityRoute)
 
 /**
  * Port
  */
 app.listen(3000, () => {
-	console.log('yes i am here biatch !')
+  console.log('App is listening on port 3000')
 })
 
 /**
  * Homepage
  */
-app.get('/', (req, res, next) => {
-	res.send('<h1>This is only the frontpage yeah</h1>')
+app.get('/api', (req, res, next) => {
+  res.send('<h1>This is only the frontpage yeah</h1>')
 })

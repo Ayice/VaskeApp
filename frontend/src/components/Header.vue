@@ -12,22 +12,27 @@
 				<span class="navbar-burger-span"></span>
 				<span class="navbar-burger-span"></span>
 			</a>
+
 			<div class="navbar-menu" :class="show ? 'show' : ''">
-				<router-link to="/about" class="navbar-item">About</router-link>
-
-				<router-link to="/about" class="navbar-item">About</router-link>
-
-				<router-link to="/about" class="navbar-item">About</router-link>
+				<router-link
+					v-for="route in routes.options.routes"
+					:key="route.name"
+					:to="route.path"
+					class="navbar-item"
+				>{{route.name}}</router-link>
 			</div>
 		</nav>
 	</header>
 </template>
 
 <script>
+import router from '../router/index'
+
 export default {
 	name: 'Header',
 	data() {
 		return {
+			routes: router,
 			show: false
 		}
 	},

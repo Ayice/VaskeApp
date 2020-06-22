@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { postLogin } from '../utils/api.js'
+import { mapActions } from 'vuex'
 
 export default {
 	name: 'LoginForm',
@@ -48,14 +48,16 @@ export default {
 		}
 	},
 	methods: {
-		login(form) {
+		...mapActions(['handleLogin', 'postLogin']),
+
+		login(formData) {
 			const data = {
-				email: form.email,
-				password: form.password
+				email: formData.email,
+				password: formData.password
 			}
-			postLogin(data).then(data => {
-				// Need to save this data.token in store, for future requests.
-				console.log(data)
+			this.postLogin(data)
+			.then(() => {
+				this.$router.push('/about')
 			})
 		}
 	}

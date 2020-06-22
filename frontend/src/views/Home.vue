@@ -12,6 +12,7 @@
 <script>
 // @ is an alias to /src
 import LoginForm from '@/components/Login/components/LoginForm.vue'
+
 export default {
 	name: 'Home',
 	components: {
