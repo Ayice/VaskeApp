@@ -16,15 +16,17 @@
 							to="/create-machine"
 							tag="button"
 							class="btn btn-primary"
-							>Opret maskine her</router-link
-						>
+							>Opret maskine her
+						</router-link>
 					</div>
 					<Machine
 						v-for="machine in machinesInApp"
 						:key="machine._id"
 						:machine="machine"
+						@showModal="rentAMachine($data)"
 						v-else
-					/>
+					>
+					</Machine>
 				</div>
 			</div>
 		</div>
@@ -46,10 +48,16 @@ export default {
 	},
 	data() {
 		return {
-			showModal: false
+			showModal: false,
+			chosenMachine: null
 		}
 	},
-	methods: {},
+	methods: {
+		rentAMachine($data) {
+			this.showModal = true
+			this.chosenMachine = $data
+		}
+	},
 	computed: {
 		...mapGetters(['machinesInApp'])
 	}
