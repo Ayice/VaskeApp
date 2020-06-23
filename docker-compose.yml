@@ -1,11 +1,23 @@
 version: '3.7'
 
 services:
+  api:
+    build: ./Api
+    environment:
+      - DB_CONNECTION=mongodb+srv://AndersKjaerP:7Vxi1aszrI0OlmOx@stockingup-ptnwf.gcp.mongodb.net/vaskemaskine_leje?retryWrites=true&w=majority
+      - TOKEN_SECRET=Jhfudsal2345jmisaæRJhfudsal2345jmisaæRJhfudsal2345jmisaæRJhfudsal2345jmisaæR
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules/
+    ports:
+      - '3000:3000'
   vaske_app:
     container_name: frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    environment:
+      - VUE_APP_API_URL=http://localhost:3000/api/
     volumes:
       - './frontend:/app/'
       - '/app/node_modules'
