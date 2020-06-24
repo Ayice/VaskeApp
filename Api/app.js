@@ -54,5 +54,5 @@ app.listen(3000, () => {
  * Homepage
  */
 app.get('/api', (req, res, next) => {
-  res.send('<h1>This is only the frontpage yeah</h1>')
+  res.send('<h1>This is Only the frontpage yeah</h1>')
 })
