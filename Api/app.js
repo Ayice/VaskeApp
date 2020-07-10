@@ -40,8 +40,8 @@ app.use(
  */
 app.use('/api/machine', authFuntion, machineRoute)
 app.use('/api/user', userRoute)
-app.use('/api/appartment', appartmentRoute)
-app.use('/api/city', cityRoute)
+app.use('/api/appartment', authFuntion, appartmentRoute)
+app.use('/api/city', authFuntion, cityRoute)
 
 /**
  * Port
