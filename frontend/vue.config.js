@@ -6,17 +6,8 @@ module.exports = {
   },
   pluginOptions: {
     'style-resources-loader': {
-      preProcessor: 'scss',
-      patterns: [path.resolve(__dirname, './src/assets/styles/global.scss')]
+      preProcessor: 'sass',
+      patterns: [ path.resolve(__dirname, './src/assets/styles/_global.sass') ]
     }
   },
-  css: {
-    loaderOptions: {
-      sass: {
-        prependData: `
-					@import "@/assets/styles/setup/_variables.scss";
-				`
-      }
-    }
-  }
 };

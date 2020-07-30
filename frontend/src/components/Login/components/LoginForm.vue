@@ -1,8 +1,5 @@
 <template>
-  <form
-    class="form login-form"
-    @submit.prevent="login"
-  >
+  <form class="form login-form" @submit.prevent="login">
     <div class="form-group">
       <label for="email">Email address</label>
       <input
@@ -14,10 +11,7 @@
         aria-describedby="emailHelp"
         placeholder="example@example.com"
       />
-      <small
-        id="emailHelp"
-        class="form-text text-muted"
-      >Skriv din email her.</small>
+      <small id="emailHelp" class="form-text text-muted">Skriv din email her.</small>
     </div>
 
     <div class="form-group">
@@ -31,10 +25,7 @@
         aria-describedby="passwordHelp"
         placeholder="******"
       />
-      <small
-        id="passwordHelp"
-        class="form-text text-muted"
-      >Skriv dit password her.</small>
+      <small id="passwordHelp" class="form-text text-muted">Skriv dit password her.</small>
     </div>
 
     <div class="form-group">
@@ -70,20 +61,8 @@ export default {
         password: this.password
       };
 
-      this.postLogin(data)
-        .then(() => {
-          this.$router.push('/about');
-          this.SET_IS_LOADING(false);
-        })
-        .catch(() => {
-          this.SET_IS_LOADING(false);
-        });
+      this.postLogin(data);
     }
   }
 };
 </script>
-
-<style scoped lang="scss">
-@import '../../../assets/styles/basics/_forms.scss';
-@import '../../../assets/styles/components/_login-form.scss';
-</style>
