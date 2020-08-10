@@ -4,12 +4,12 @@
       <img :src="apiUrl + machine.machine_image" :alt="machine.title" />
     </div>
 
-    <div class="col-7 machine__text">
+    <div class="col-5 machine__text">
       <p class="machine__title">{{ machine.title }}</p>
       <p class="machine__time">{{ timetime | removeDigits }}</p>
     </div>
-    <div class="col-2">
-      <button class="btn btn-primary machine__rent-btn" @click="$emit('showModal', machine)">Brug</button>
+    <div class="col-4">
+      <router-link :to="`machine-overview/${machine._id}`" class="btn btn-primary machine__rent-btn">Lej maskine</router-link>
     </div>
   </div>
 </template>
@@ -40,7 +40,11 @@ export default {
         let dateInMilli = new Date().getTime();
         // let counter = 0;
         let timeLeft = new Date(this.machine.tid_tilbage);
-        this.currentDate = (timeLeft - dateInMilli) / 1000 / 60;
+        if ( timeLeft/60 < 1 ) {
+          this.currentDate = (timeLeft - dateInMilli) / 1000;
+        } else {
+          this.currentDate = (timeLeft - dateInMilli) / 1000 / 60;
+        }
       }, 1000);
     }
   },

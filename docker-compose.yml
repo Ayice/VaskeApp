@@ -3,9 +3,8 @@ version: '3.7'
 services:
   api:
     build: ./Api
-    environment:
-      - DB_CONNECTION=mongodb+srv://AndersKjaerP:7Vxi1aszrI0OlmOx@stockingup-ptnwf.gcp.mongodb.net/vaskemaskine_leje?retryWrites=true&w=majority
-      - TOKEN_SECRET=Jhfudsal2345jmisaæRJhfudsal2345jmisaæRJhfudsal2345jmisaæRJhfudsal2345jmisaæR
+    env_file: 
+      - ./Api/.env
     volumes:
       - ./Api:/usr/src/app/
       - /usr/src/app/node_modules/
@@ -16,8 +15,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    environment:
-      - VUE_APP_API_URL=http://localhost:3000/api/
+    env_file:
+      - ./frontend/.env.development.local
     volumes:
       - './frontend:/app/'
       - '/app/node_modules'

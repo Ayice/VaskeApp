@@ -38,6 +38,7 @@ router.get('/', (req, res) => {
  *
  */
 router.post('/', upload.single('machineImage'), (req, res) => {
+  console.log(req.file);
   const machineData = new Machine({
     title: req.body.title,
     lejlighed: req.body.lejlighed,
