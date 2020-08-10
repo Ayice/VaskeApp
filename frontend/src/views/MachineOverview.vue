@@ -1,5 +1,5 @@
 <template>
-  <div class="machine-container container">
+  <div class="machine-container">
     <transition
       name="slide"
       mode="out-in"

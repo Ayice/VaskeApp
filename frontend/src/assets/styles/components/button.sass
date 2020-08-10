@@ -1,0 +1,24 @@
+.btn
+  font-size: 14px
+  border-radius: 5px
+  box-shadow: $basic-shadow
+  border: none
+  font-weight: 600
+  padding: .375rem 1rem
+  position: relative
+  overflow: hidden
+  &-link
+    &::after
+      content: '>'
+      position: absolute
+      left: 90%
+      top: 50%
+      transform: translateY(-50%)
+      transition: all .3s cubic-bezier(.63,.19,.53,.77)
+    &:hover
+      &::after
+        left: 95%
+  &-primary
+    color: #ffffff
+    background-image: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224))
+  

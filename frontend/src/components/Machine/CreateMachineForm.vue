@@ -1,6 +1,6 @@
 <template>
   <form
-    class="form login-form"
+    class="form login-form container"
     @submit.prevent="createMachine()"
   >
     <div class="form-group">
@@ -59,9 +59,7 @@
         form.append('title', this.title);
         form.append('lejlighed', this.$store.getters.userAppartment);
 
-        postNewMachine(form).then(res => {
-          console.log(res);
-        });
+        postNewMachine(form);
       },
       onFileSelected(event) {
         this.image = event.target.files[0];

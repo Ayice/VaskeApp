@@ -1,9 +1,8 @@
 <template>
-  <div class="machine-modal">
+  <div class="machine-modal container">
     <div class="row">
-
-      <div class="col-12 breadcrumbs">
-
+      <div class="col-12">
+        <h2 class="machine-modal__title">{{ machine.title }}</h2>
       </div>
 
       <div class="col-12">
@@ -13,10 +12,6 @@
             :alt="machine.title"
           />
         </div>
-      </div>
-
-      <div class="col-12">
-        <h2 class="machine-modal__title">{{ machine.title }}</h2>
       </div>
 
       <div class="col-12">
@@ -75,9 +70,13 @@
           machineId: this.machine._id,
         };
 
-        this.postRentMachine(data).then(() => {
-          this.$router.push('/machine-overview/renting-status');
-        });
+        this.postRentMachine(data)
+          .then(() => {
+            this.$router.push('/machine-overview/renting-status');
+          })
+          .catch(() => {
+            this.$router.push('/machine-overview/renting-status');
+          });
       },
     },
     computed: {

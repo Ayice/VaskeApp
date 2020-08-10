@@ -14,7 +14,7 @@ export default new Vuex.Store({
     authenticated: false,
     machines: [],
     api: process.env.VUE_APP_API_URL,
-    statusMsg: {}
+    statusMsg: {},
   },
   mutations,
   actions,

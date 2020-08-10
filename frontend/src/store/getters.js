@@ -12,9 +12,9 @@ export default {
     return state.user.lejlighed;
   },
   getSpecificMachine: state => id => {
-    return state.machines.find(machine => machine.id = id);
+    return state.machines.find(machine => machine._id == id);
   },
   getStatusMsg: state => {
     return state.statusMsg;
   }
-}
+};

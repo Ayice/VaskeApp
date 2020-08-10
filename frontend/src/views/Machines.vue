@@ -27,10 +27,10 @@
       </div>
     </div>
     <div class="row new-machine">
-      <div class="col">
+      <div class="col-12">
         <router-link
           tag="button"
-          class="btn"
+          class="btn btn-link"
           to="machine-overview/create-machine"
         >
           Opret ny maskine
@@ -42,11 +42,17 @@
 
 <script>
   import Machine from '@/components/Machine/Machine';
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
 
   export default {
     components: {
       Machine,
+    },
+    methods: {
+      ...mapActions(['fetchMachines']),
+    },
+    mounted() {
+      // this.fetchMachines(this.userAppartment);
     },
     computed: {
       ...mapGetters(['machinesInApp', 'isLoading', 'userAppartment']),

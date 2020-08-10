@@ -62,29 +62,30 @@ router.post('/', upload.single('machineImage'), (req, res) => {
  */
 
 router.get('/:id', (req, res) => {
+
   let machines = [];
+
   Machine.find({ lejlighed: req.params.id })
     .then(result => {
       machines = [ ...result ];
 
       machines.forEach((machine, index, array) => {
-        RentMachine.findOne({ machine_id: machine._id }).then(
-          (response, err) => {
+        RentMachine.findOne({ machine_id: machine._id })
+          .then((response, err) => {
             if (err) return res.json(machine);
+
             if (!response) {
-              console.log('None found');
               return res.json(machines);
             }
-            console.log(response.renting_free);
+
             machine[ 'tid_tilbage' ] = response.renting_free;
 
-            console.log(machine);
             if (array.length === index + 1) {
               return res.json(machines);
             }
             return;
           }
-        );
+          );
       });
     })
     .catch(err => {

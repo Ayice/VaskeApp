@@ -11,7 +11,7 @@
 
 <script>
   import { mapMutations, mapState, mapActions } from 'vuex';
-  import Header from './components/Header';
+  import Header from './components/Partials/Header';
   import BreadCrumbs from './components/Partials/BreadCrumbs';
 
   export default {
