@@ -44,7 +44,7 @@ router.get('/:zip', (req, res) => {
 
 /**
  *
- * Insert every city in denmark !! (Works)
+ * Insert every city in denmark
  *
  */
 
@@ -55,16 +55,19 @@ router.get('/magic', async (req, res) => {
     })
     .then(async (response) => {
       response.forEach((city) => {
-        let cityData = {
+        const cityData = {
           title: city.navn,
           zip: city.nr,
         };
-        let headers = { 'Content-Type': 'application/json' };
-        let jsonCityData = JSON.stringify(cityData);
+
+        const headers = { 'Content-Type': 'application/json' };
+
+        const jsonCityData = JSON.stringify(cityData);
+
         fetch('http://localhost:3000/city', { method: 'POST', headers: headers, body: jsonCityData });
       });
     })
-    .then((response) => {
+    .then((res) => {
       res.json('I am INEVITABLE!');
     });
 });

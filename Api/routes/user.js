@@ -24,11 +24,13 @@ router.post('/create', async (req, res) => {
   }
   // Check if the Email is already in use
   const emailChecker = await User.findOne({ email: req.body.email });
-  if (emailChecker)
+
+  if (emailChecker) {
     return res.status(400).json({
       status: 'Error',
       msg: `Emailen: ${req.body.email}, findes allerede`,
     });
+  }
 
   // Hash Passwords
   const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
@@ -48,6 +50,7 @@ router.post('/create', async (req, res) => {
   // Save the model to the database
   try {
     const saveUser = await newUser.save();
+
     res.status(200).json({
       status: 'Success',
       msg: 'Bruger oprettet',
@@ -63,6 +66,7 @@ router.post('/create', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   let user = await User.findOne({ _id: req.params.id });
+
   if (!user)
     return res.status(400).json({
       status: 'Error',
@@ -70,7 +74,9 @@ router.get('/:id', async (req, res) => {
     });
 
   let newUser = { ...user._doc };
+
   delete newUser[ 'password' ];
+
   return res.status(200).json({
     status: 'Success',
     user: newUser,
@@ -80,18 +86,22 @@ router.get('/:id', async (req, res) => {
 router.post('/login', async (req, res) => {
   // Check email
   const user = await User.findOne({ email: req.body.email });
-  if (!user)
+
+  if (!user) {
     return res.status(400).json({
       status: 'Error',
       msg: `Emailen: ${req.body.email}, findes ikke i databasen`,
     });
+  }
 
   // Compare the passwords
   const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword)
+
+  if (!validPassword) {
     return res
       .status(400)
       .json({ status: 'Error', msg: 'Email og password matcher ikke ' });
+  }
 
   // Create Json web token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);

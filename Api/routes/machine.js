@@ -38,7 +38,6 @@ router.get('/', (req, res) => {
  *
  */
 router.post('/', upload.single('machineImage'), (req, res) => {
-  console.log(req.file);
   const machineData = new Machine({
     title: req.body.title,
     lejlighed: req.body.lejlighed,
@@ -60,7 +59,6 @@ router.post('/', upload.single('machineImage'), (req, res) => {
  * Get machines for a specific Appartment
  *
  */
-
 router.get('/:id', (req, res) => {
 
   let machines = [];

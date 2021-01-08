@@ -6,5 +6,4 @@ const RentMachineSchema = new Schema({
   renting_free: { type: Number, required: true },
 });
 
-// Navnet her i string er input i database, altså en collection
 module.exports = mongoose.model('RentMachine', RentMachineSchema);

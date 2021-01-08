@@ -32,7 +32,6 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-
   const app = await Appartment.findById(req.params.id);
   const city = await City.findById(app.by);
 
