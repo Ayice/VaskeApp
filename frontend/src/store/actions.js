@@ -25,7 +25,7 @@ export default {
       }).catch(err => {
         commit('SET_IS_LOADING', false);
 
-        console(err.response.data);
+        console.log(err.response.data);
       });
   },
   getUserData({ commit, dispatch }, userId) {

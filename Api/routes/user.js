@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
 router.post('/create', async (req, res) => {
   // Validate the request
   const { error } = validateNewUser(req.body);
+
   if (error) {
     return res.status(400).json({
       status: 'Error',
