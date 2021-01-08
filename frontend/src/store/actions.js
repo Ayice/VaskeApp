@@ -1,5 +1,4 @@
 import axios from 'axios';
-import router from 'vue-router';
 
 export default {
   // Login function
@@ -20,14 +19,13 @@ export default {
       .then(() => {
         dispatch('fetchMachines', state.user.lejlighed)
           .then(() => {
-            router.push('/machine-overview/');
             commit('SET_IS_LOADING', false);
           })
-          .catch(err => {
-            commit('SET_IS_LOADING', false);
 
-            return err.response.data;
-          });
+      }).catch(err => {
+        commit('SET_IS_LOADING', false);
+
+        console(err.response.data);
       });
   },
   getUserData({ commit, dispatch }, userId) {
@@ -56,8 +54,6 @@ export default {
 
     localStorage.userId = '';
     localStorage.token = '';
-
-    router.push('/');
 
     setTimeout(() => {
       commit('SET_IS_LOADING', false);
@@ -100,4 +96,25 @@ export default {
 
     commit('SET_IS_LOADING', false);
   },
+
+  async getAppartment({ commit, state }) {
+    commit('SET_IS_LOADING', true);
+
+    const response = await axios.get(`${process.env.VUE_APP_API_URL}appartment/${state.user.lejlighed}`,
+      {
+        headers: { 'auth-token': state.userToken }
+      });
+
+    commit('SET_IS_LOADING', false);
+
+    return response.data;
+  },
+  async fetchCity({ state }, data) {
+    const response = await axios.get(`${process.env.VUE_APP_API_URL}city/${data}`,
+      {
+        headers: { 'auth-token': state.userToken }
+      });
+
+    return response.data;
+  }
 };

@@ -35,7 +35,7 @@
         >{{ route.name }}</router-link>
         <button
           class="btn btn-secondary btn-logout"
-          @click="logout"
+          @click="handleLogout"
         >Logout</button>
       </div>
     </nav>
@@ -55,6 +55,11 @@
 
     methods: {
       ...mapActions(['logout']),
+      handleLogout() {
+        this.logout().then(() => {
+          this.$router.push('/');
+        });
+      },
       showMenu() {
         this.show = !this.show;
       },

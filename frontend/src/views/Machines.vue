@@ -7,7 +7,7 @@
     </div>
 
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 machines">
         <div v-if="machinesInApp.length < 1">
           <p>Der er endnu ikke nogle maskiner oprettet i din bopæl</p>
           <p>Opret en herunder</p>

@@ -19,7 +19,7 @@ router.post('/create', async (req, res) => {
   if (error) {
     return res.status(400).json({
       status: 'Error',
-      msg: error.details[0].message,
+      msg: error.details[ 0 ].message,
     });
   }
   // Check if the Email is already in use
@@ -70,7 +70,7 @@ router.get('/:id', async (req, res) => {
     });
 
   let newUser = { ...user._doc };
-  delete newUser['password'];
+  delete newUser[ 'password' ];
   return res.status(200).json({
     status: 'Success',
     user: newUser,
@@ -97,12 +97,20 @@ router.post('/login', async (req, res) => {
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
 
   let newUser = { ...user._doc };
-  delete newUser['password'];
+
+  delete newUser[ 'password' ];
+
   res.header('auth-token', token).json({
     status: 'Success',
     msg: 'Du er nu logget ind',
     token: token,
     user: newUser,
+  });
+});
+
+router.put('/:id', (req, res) => {
+  User.findOne({ _id: req.body.id }, (err, doc) => {
+    doc.lejlighed = req.body.lejlighed;
   });
 });
 

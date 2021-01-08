@@ -57,7 +57,7 @@ router.post('/', upload.single('machineImage'), (req, res) => {
 
 /**
  *
- * Get machines for a specific Appartment (Works)
+ * Get machines for a specific Appartment
  *
  */
 
@@ -74,18 +74,14 @@ router.get('/:id', (req, res) => {
           .then((response, err) => {
             if (err) return res.json(machine);
 
-            if (!response) {
-              return res.json(machines);
-            }
-
-            machine[ 'tid_tilbage' ] = response.renting_free;
+            if (response) machine[ 'tid_tilbage' ] = response.renting_free;
 
             if (array.length === index + 1) {
               return res.json(machines);
             }
+
             return;
-          }
-          );
+          });
       });
     })
     .catch(err => {
@@ -94,12 +90,15 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/rent/:id', async (req, res) => {
-  let rentingTime = req.body.time * 60 * 1000;
+  const rentingTime = req.body.time * 60 * 1000;
+
+  let counter = 0;
   let freeForRentTime = 0;
-  let rentMachine = await RentMachine.findOne({ machine_id: req.params.id });
+
+  const rentMachine = await RentMachine.findOne({ machine_id: req.params.id });
 
   if (rentMachine) {
-    return res.status(400).json({
+    return res.json({
       status: 'Error',
       msg: 'Maskinen er allerede optaget, desværre',
     });
@@ -109,7 +108,8 @@ router.post('/rent/:id', async (req, res) => {
     return new Promise((resolve, reject) => {
       freeTime(rentingTime).then(data => {
         let date = new Date(data);
-        return resolve(date);
+
+        resolve(date);
       });
     });
   };
@@ -117,17 +117,22 @@ router.post('/rent/:id', async (req, res) => {
   const freeTime = h => {
     return new Promise((resolve, reject) => {
       let date = new Date();
-      let addTime = date.setTime(date.getTime() + h);
+
+      const addTime = date.setTime(date.getTime() + h);
+
       freeForRentTime = addTime;
-      return resolve(addTime);
+
+      resolve(addTime);
     });
   };
+
   convertMilliToDate();
 
-  let counter = 0;
-  let timer = setInterval(() => {
+  const timer = setInterval(() => {
     counter++;
-    let newTime = rentingTime / 1000 - counter;
+
+    const newTime = rentingTime / 1000 - counter;
+
     return newTime;
   }, 1000);
 
@@ -138,10 +143,11 @@ router.post('/rent/:id', async (req, res) => {
 
   try {
     const newRent = await rentMachineData.save();
+
     setTimeout(() => {
       RentMachine.deleteOne({ machine_id: newRent.machine_id }, err => {
         if (err) return console.log(err);
-        console.log('removed');
+
         clearInterval(timer);
       });
     }, rentingTime);

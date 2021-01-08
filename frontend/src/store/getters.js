@@ -16,5 +16,8 @@ export default {
   },
   getStatusMsg: state => {
     return state.statusMsg;
+  },
+  getUserDetails: state => {
+    return state.user;
   }
 };

@@ -9,7 +9,7 @@
 
     <div class="col-5 machine__text">
       <p class="machine__title">{{ machine.title }}</p>
-      <p class="machine__time">{{ timetime | removeDigits }}</p>
+      <p class="machine__time">{{timetime > 0 ? timetime : 'fri' | removeDigits }}</p>
     </div>
     <div class="col-4">
       <router-link
@@ -47,7 +47,6 @@
           // let counter = 0;
           let timeLeft = new Date(this.machine.tid_tilbage);
           if (timeLeft / 60 <= 1) {
-            console.log('sdfasdf');
             this.currentDate = (timeLeft - dateInMilli) / 1000;
           } else {
             this.currentDate = (timeLeft - dateInMilli) / 1000 / 60;
@@ -56,7 +55,6 @@
       },
     },
     created() {
-      console.log('created');
       this.getCurrentDate();
     },
     computed: {
@@ -67,10 +65,6 @@
         return this.currentDate;
       },
     },
-    // mounted() {
-    //   console.log('mounted');
-    //   this.getCurrentDate();
-    // },
     beforeDestroy() {
       clearInterval(this.timeLeft);
     },

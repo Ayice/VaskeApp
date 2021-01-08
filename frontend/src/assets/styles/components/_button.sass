@@ -1,4 +1,5 @@
 .btn
+  color: #fffff !important
   font-size: 14px
   border-radius: 5px
   box-shadow: $basic-shadow
@@ -7,6 +8,11 @@
   padding: .375rem 1rem
   position: relative
   overflow: hidden
+  &:focus,
+  &:active,
+  &:hover
+    box-shadow: 0px 2px 5px rgba(10, 10, 10, 0.3)
+    
   &-link
     &::after
       content: '>'
@@ -17,8 +23,8 @@
       transition: all .3s cubic-bezier(.63,.19,.53,.77)
     &:hover
       &::after
-        left: 95%
+        left: 92%
   &-primary
-    color: #ffffff
     background-image: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224))
+
   

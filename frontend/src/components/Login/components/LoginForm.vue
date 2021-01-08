@@ -1,5 +1,8 @@
 <template>
-  <form class="form login-form" @submit.prevent="login">
+  <form
+    class="form login-form"
+    @submit.prevent="login"
+  >
     <div class="form-group">
       <label for="email">Email address</label>
       <input
@@ -11,7 +14,11 @@
         aria-describedby="emailHelp"
         placeholder="example@example.com"
       />
-      <small id="emailHelp" class="form-text text-muted">Skriv din email her.</small>
+
+      <small
+        id="emailHelp"
+        class="form-text text-muted"
+      >Skriv din email her.</small>
     </div>
 
     <div class="form-group">
@@ -25,7 +32,10 @@
         aria-describedby="passwordHelp"
         placeholder="******"
       />
-      <small id="passwordHelp" class="form-text text-muted">Skriv dit password her.</small>
+      <small
+        id="passwordHelp"
+        class="form-text text-muted"
+      >Skriv dit password her.</small>
     </div>
 
     <div class="form-group">
@@ -35,34 +45,36 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex';
+  import { mapActions, mapMutations } from 'vuex';
 
-export default {
-  data() {
-    return {
-      email: '',
-      password: ''
-    };
-  },
-  methods: {
-    ...mapActions(['postLogin']),
-    ...mapMutations([
-      'SET_AUTHENTICATION',
-      'SET_USER_DATA',
-      'SET_USER_TOKEN',
-      'SET_IS_LOADING'
-    ]),
-
-    login() {
-      this.SET_IS_LOADING(true);
-
-      const data = {
-        email: this.email,
-        password: this.password
+  export default {
+    data() {
+      return {
+        email: '',
+        password: '',
       };
+    },
+    methods: {
+      ...mapActions(['postLogin']),
+      ...mapMutations([
+        'SET_AUTHENTICATION',
+        'SET_USER_DATA',
+        'SET_USER_TOKEN',
+        'SET_IS_LOADING',
+      ]),
 
-      this.postLogin(data);
-    }
-  }
-};
+      login() {
+        this.SET_IS_LOADING(true);
+
+        const data = {
+          email: this.email,
+          password: this.password,
+        };
+
+        this.postLogin(data).then(() => {
+          this.$router.push('/machine-overview');
+        });
+      },
+    },
+  };
 </script>

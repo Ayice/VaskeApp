@@ -1,10 +1,10 @@
 <template>
   <form
-    class="form login-form container"
+    class="form login-form create-machine__form container"
     @submit.prevent="createMachine()"
   >
     <div class="form-group">
-      <label for="machine-name">Maskines navn</label>
+      <label for="machine-name">Maskinens navn</label>
       <input
         v-model="title"
         type="text"
@@ -17,11 +17,16 @@
       <small
         id="machine-name"
         class="form-text text-muted"
-      >Skriv Vaskemaskinens navn</small>
+      >Skriv titlen på den maskine du vil oprette</small>
     </div>
 
-    <div class="form-group">
+    <div class="form-group create-machine__image-group">
       <label for="machine-img">Billede af maskine</label>
+      <img
+        class="create-machine__image"
+        src=""
+        ref="machineImg"
+      />
       <input
         type="file"
         id="machineImg"
@@ -50,6 +55,7 @@
       return {
         title: '',
         image: {},
+        machineImg: '',
       };
     },
     methods: {
@@ -63,6 +69,8 @@
       },
       onFileSelected(event) {
         this.image = event.target.files[0];
+
+        this.$refs.machineImg.src = URL.createObjectURL(event.target.files[0]);
       },
     },
   };
