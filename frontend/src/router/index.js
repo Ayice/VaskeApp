@@ -8,6 +8,7 @@ import StatusModal from '../components/Partials/StatusModal';
 import CreateMachine from '../components/Machine/CreateMachineForm';
 import ProfileView from '../views/ProfileView';
 import ProfileInfo from '../components/Profile/ProfileInfo';
+import Signup from '../components/Signup/Signup.vue';
 
 
 Vue.use(VueRouter);
@@ -73,6 +74,11 @@ const routes = [
 
       }
     ]
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: Signup
   }
 ];
 
@@ -84,10 +90,12 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.name !== 'Home' && !store.state.authenticated) {
-    next({ name: 'Home' });
-  } else if (to.name == 'Home' && store.state.authenticated) {
-    next({ name: 'machines' });
-  } else next();
-});
+    next({name: 'Home'});
+  } else if (to.name === 'Home' && store.state.authenticated) {
+    next({name: 'machines'});
+  } else {
+    next();
+  }
+})
 
 export default router;

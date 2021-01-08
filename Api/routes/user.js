@@ -60,7 +60,7 @@ router.post('/create', async (req, res) => {
   } catch (error) {
     res.status(400).json({
       status: 'Error',
-      msg: 'Brugernavnet findes allerede!',
+      msg: error,
     });
   }
 });

@@ -32,6 +32,7 @@
     mounted() {
       if (localStorage.token) {
         this.getUserToken();
+
         this.$router.push('/machine-overview');
       }
     },

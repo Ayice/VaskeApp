@@ -1,4 +1,5 @@
 <template>
+<div class="container">
   <form
     class="form login-form"
     @submit.prevent="login"
@@ -14,11 +15,6 @@
         aria-describedby="emailHelp"
         placeholder="example@example.com"
       />
-
-      <small
-        id="emailHelp"
-        class="form-text text-muted"
-      >Skriv din email her.</small>
     </div>
 
     <div class="form-group">
@@ -32,16 +28,13 @@
         aria-describedby="passwordHelp"
         placeholder="******"
       />
-      <small
-        id="passwordHelp"
-        class="form-text text-muted"
-      >Skriv dit password her.</small>
     </div>
 
     <div class="form-group">
       <button class="btn btn-success btn-block">Log in</button>
     </div>
   </form>
+</div>
 </template>
 
 <script>
@@ -71,7 +64,10 @@
           password: this.password,
         };
 
-        this.postLogin(data).then(() => {
+        this.postLogin(data)
+        .then(() => {
+          this.SET_AUTHENTICATION(true);
+        }).then(() => {
           this.$router.push('/machine-overview');
         });
       },

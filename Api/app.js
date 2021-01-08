@@ -49,3 +49,7 @@ app.use('/api/city', authFuntion, cityRoute);
 app.listen(3000, () => {
   console.log('App is listening on port 3000');
 });
+
+app.get('/api', (req, res, next) => {
+  res.send('<h1>This is Only the frontpage yeah</h1>');
+});

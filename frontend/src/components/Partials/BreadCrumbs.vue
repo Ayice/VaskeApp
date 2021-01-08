@@ -25,7 +25,9 @@
     computed: {
       breadCrumbs() {
         let pathArray = this.$route.path.split('/');
+
         pathArray.shift();
+
         let breadCrumbs = pathArray.reduce((breadCrumbArray, path, idx) => {
           breadCrumbArray.push({
             path: path,
